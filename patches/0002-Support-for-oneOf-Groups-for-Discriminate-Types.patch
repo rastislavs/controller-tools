@@ -1,7 +1,7 @@
-From 675bb6189355a799ce77ef6da93e94f40d5001b7 Mon Sep 17 00:00:00 2001
+From f39414550498a20d9695e7912ec6352919beb812 Mon Sep 17 00:00:00 2001
 From: Matt Ellison <matt@arroyo.io>
 Date: Tue, 6 Aug 2019 09:25:28 -0400
-Subject: [PATCH 2/3] Support for oneOf Groups for Discriminate Types
+Subject: [PATCH 2/4] Support for oneOf Groups for Discriminate Types
 
 Signed-off-by: Chris Tarazi <tarazichris@gmail.com>
 ---
@@ -73,5 +73,5 @@ index 717819e7..a4f1f357 100644
  
  		applyMarkers(ctx, field.Markers, propSchema, field.RawField)
 -- 
-2.32.0
+2.34.1
 
