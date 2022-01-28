@@ -158,6 +158,11 @@ type CronJobSpec struct {
 	// This tests that the schemaless marker works
 	// +kubebuilder:validation:Schemaless
 	Schemaless []byte `json:"schemaless,omitempty"`
+
+	// Test of the expression-based validation rule marker, with optional message.
+	// +kubebuilder:validation:XValidation:rule="self.size() % 2 == 0",message="must have even length"
+	// +kubebuilder:validation:XValidation:rule="true"
+	StringWithEvenLength string `json:"stringWithEvenLength,omitempty"`
 }
 
 // +kubebuilder:validation:Type=object
