@@ -32,7 +32,6 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/apimachinery/pkg/util/intstr"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -162,29 +161,12 @@ type CronJobSpec struct {
 	// +kubebuilder:validation:Schemaless
 	Schemaless []byte `json:"schemaless,omitempty"`
 
-	// This tests that an IntOrString can also have a pattern attached
-	// to it.
-	// This can be useful if you want to limit the string to a perecentage or integer.
-	// The XIntOrString marker is a requirement for having a pattern on this type.
-	// +kubebuilder:validation:XIntOrString
-	// +kubebuilder:validation:Pattern="^((100|[0-9]{1,2})%|[0-9]+)$"
-	IntOrStringWithAPattern *intstr.IntOrString `json:"intOrStringWithAPattern,omitempty"`
+	// This tests that unexported fields are skipped in the schema generation
+	unexportedField string
 
-	// Checks that nested maps work
-	NestedMap map[string]map[string]string `json:"nestedMap,omitempty"`
-
-	// Checks that multiply-nested maps work
-	NestedNestedMap map[string]map[string]map[string]string `json:"nestedNestedMap,omitempty"`
-
-	// Checks that maps containing types that contain maps work
-	ContainsNestedMapMap map[string]ContainsNestedMap `json:"nestedMapInStruct,omitempty"`
-
-	// Maps of arrays of things-that-aren’t-strings are permitted
-	MapOfArraysOfFloats map[string][]bool `json:"mapOfArraysOfFloats,omitempty"`
-}
-
-type ContainsNestedMap struct {
-	InnerMap map[string]string `json:"innerMap,omitempty"`
+	// This tests that both unexported and exported inline fields are not skipped in the schema generation
+	unexportedStruct `json:",inline"`
+	ExportedStruct   `json:",inline"`
 }
 
 // +kubebuilder:validation:Type=object
@@ -233,6 +215,22 @@ type MinMaxObject struct {
 	Foo string `json:"foo,omitempty"`
 	Bar string `json:"bar,omitempty"`
 	Baz string `json:"baz,omitempty"`
+}
+
+type unexportedStruct struct {
+	// This tests that exported fields are not skipped in the schema generation
+	Foo string `json:"foo"`
+
+	// This tests that unexported fields are skipped in the schema generation
+	bar string
+}
+
+type ExportedStruct struct {
+	// This tests that exported fields are not skipped in the schema generation
+	Baz string `json:"baz"`
+
+	// This tests that unexported fields are skipped in the schema generation
+	qux string
 }
 
 type RootObject struct {

@@ -55,6 +55,9 @@ spec:
                 - name
                 - secondary
                 x-kubernetes-list-type: map
+              baz:
+                description: This tests that exported fields are not skipped in the schema generation
+                type: string
               binaryName:
                 description: This tests byte slice schema generation.
                 format: byte
@@ -124,16 +127,9 @@ spec:
                   a pointer to distinguish between explicit zero and not specified.
                 format: int32
                 type: integer
-              intOrStringWithAPattern:
-                anyOf:
-                - type: integer
-                - type: string
-                description: This tests that an IntOrString can also have a pattern
-                  attached to it. This can be useful if you want to limit the string
-                  to a perecentage or integer. The XIntOrString marker is a requirement
-                  for having a pattern on this type.
-                pattern: ^((100|[0-9]{1,2})%|[0-9]+)$
-                x-kubernetes-int-or-string: true
+              foo:
+                description: This tests that exported fields are not skipped in the schema generation
+                type: string
               jobTemplate:
                 description: Specifies the job that will be created when executing
                   a CronJob.
@@ -7312,12 +7308,14 @@ spec:
                 x-kubernetes-preserve-unknown-fields: true
             required:
             - associativeList
+            - baz
             - binaryName
             - canBeNull
             - defaultedObject
             - defaultedSlice
             - defaultedString
             - embeddedResource
+            - foo
             - jobTemplate
             - mapOfInfo
             - patternObject
