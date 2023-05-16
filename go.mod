@@ -10,10 +10,10 @@ require (
 	github.com/onsi/gomega v1.14.0
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/pflag v1.0.5
-	golang.org/x/tools v0.1.5
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
-	k8s.io/api v0.21.3
-	k8s.io/apiextensions-apiserver v0.21.3
-	k8s.io/apimachinery v0.21.3
+	golang.org/x/tools v0.1.12
+	gopkg.in/yaml.v3 v3.0.1
+	k8s.io/api v0.23.17
+	k8s.io/apiextensions-apiserver v0.23.17
+	k8s.io/apimachinery v0.23.17
 	sigs.k8s.io/yaml v1.2.0
 )
